@@ -1,4 +1,4 @@
-# Validate HackerNews articles sort order
+# Validate Hacker News article sort order
 
 ## Assignment
 
