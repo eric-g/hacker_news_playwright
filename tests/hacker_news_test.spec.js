@@ -29,9 +29,9 @@ test('Articles sorted newest to oldest', async ({ page }) => {
     }
     await moreButton.click();
   }
-  if (articles.length < numArticlesToCheck) {
-    throw new Error(`Only gathered ${articles.length} articles, expected at least ${numArticlesToCheck}`);
-  }
+
+  // Ensure we have gathered at least the specified number of articles
+  expect(articles.length, `Only gathered ${articles.length} articles, expected at least ${numArticlesToCheck}`).toBeGreaterThanOrEqual(numArticlesToCheck);
 
   console.log(`--> ${articles.length} articles gathered`);
   console.log(`--> Comparing ${articles.length} timestamps...`);
@@ -47,7 +47,8 @@ test('Articles sorted newest to oldest', async ({ page }) => {
       break;
     }
   }
-  if (!sorted) throw new Error("Articles are not sorted from newest to oldest.");
+
+  expect(sorted, "Articles are not sorted from newest to oldest").toBeTruthy();
   
   // articles are sorted, end the test
   await page.close();
